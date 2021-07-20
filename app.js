@@ -44,3 +44,21 @@ class CapyPal{
         else return true
     }
 }
+
+
+let newName = ""
+const nameButtonEl = document.getElementById('name-button')
+
+nameButtonEl.addEventListener('click', function (){
+const displayName = document.getElementsByClassName("name-display")
+const capyName = document.getElementById("capy-name-input")
+for (let i=0; i<displayName.length;i++)
+{
+    displayName[i].textContent=capyName.value
+}
+newName=capyName.value
+capyName.value=""
+})
+
+const newCapyPal = new CapyPal(newName)
+
