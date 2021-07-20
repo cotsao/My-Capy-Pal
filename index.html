@@ -13,7 +13,7 @@
         <h1>My Capy Pal</h1>
         <p>Don't kill my friend please</p>
     </div>
-    <div class="name-getter">
+    <div id="name-getter">
         <p> Enter your CapyPal's name: </p>
         <input type="text" id='capy-name-input'>
         <br>
@@ -32,23 +32,23 @@
         <h2>Keep <span class="name-display"></span> alive by keeping hunger, boredom, and exhaustion levels above zero.</h2>
     </div>
     <div id="game-board">
-        <div class="progress-bar"> <!-- hunger -->
-            <p>hunger: </p>
+        <div class="value-meter"> <!-- hunger -->
+            <p>hunger: <span id="hunger-val"></span></p>
             <progress id="hunger-bar" value="" max="100">
             </progress>
         </div>
-        <div class="progress-bar"> <!-- sleep -->
-            <p>exhaustion: </p>
+        <div class="value-meter"> <!-- sleep -->
+            <p>exhaustion: <span id="sleep-val"></span></p>
             <progress id="sleep-bar" value="" max="100">
             </progress>
         </div>
-        <div class="progress-bar"> <!-- boredom -->
-            <p>happiness: </p>
+        <div class="value-meter"> <!-- boredom -->
+            <p>happiness: <span id="happy-val"></span></p>
             <progress id="happy-bar" value="" max="100">
             </progress>
         </div>
     </div>
-    <div id="death">
+    <div id="death" class="hidden">
         <div>
             <h1><span class="name-display"></span> has received a grim reminder of the relentless nature of mortality</h1>
         </div>

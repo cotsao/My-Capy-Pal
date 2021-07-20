@@ -8,7 +8,7 @@ class CapyPal{
     hungerDrain()
     {   
         setInterval(() =>{ //drains 0-5 hunger every second
-            this.hungerLevel -= Math.floor(Math.random()*5)
+            this.hungerLevel -= Math.floor(Math.random()*25)
             
         }, 1000)
     }
@@ -36,36 +36,48 @@ class CapyPal{
     {
         this.happyLevel+=10
     }
-    isCapyAlive()
+    isCapyDead()
     {
         if (this.hungerLevel <= 0 || this.happyLevel <= 0 || this.sleepLevel <= 0)
         {
-            return false
+            return true
         }
-        else return true
+        else return false
     }
 }
 
 
 let newName = ""
 const nameButtonEl = document.getElementById('name-button')
-
 nameButtonEl.addEventListener('click', function (){
 const displayName = document.getElementsByClassName("name-display")
 const capyName = document.getElementById("capy-name-input")
-for (let i=0; i<displayName.length;i++)
+for (let i=0; i<displayName.length;i++) //change displayname span class to user input
 {
     displayName[i].textContent=capyName.value
 }
 newName=capyName.value
 capyName.value=""
 })
-
-function startGame(){
+/*
+todo:
+add age 
+add images
+add buttons
+ */
+function startGame(){ 
     const hungerMeter = document.getElementById('hunger-bar')
     const sleepMeter = document.getElementById('sleep-bar')
     const happyMeter = document.getElementById('happy-bar')
+    const hungerVal = document.getElementById('hunger-val')
+    const sleepVal = document.getElementById('sleep-val')
+    const happyVal = document.getElementById('happy-val')
 
+    
+    const inputEl = document.getElementById('name-getter')
+    inputEl.classList.add('hidden') // hide user input section
+
+    const deathEl =document.getElementById('death')
     const newCapyPal = new CapyPal(newName)
 
     newCapyPal.hungerDrain()
@@ -75,6 +87,17 @@ function startGame(){
         hungerMeter.value=newCapyPal.hungerLevel
         sleepMeter.value=newCapyPal.sleepLevel
         happyMeter.value=newCapyPal.happyLevel
+        hungerVal.textContent = newCapyPal.hungerLevel
+        sleepVal.textContent =newCapyPal.sleepLevel
+        happyVal.textContent =newCapyPal.happyLevel
+        
+        
+    if (newCapyPal.isCapyDead()) //capy dies, stop interval
+    {
+        clearInterval(run)
+        deathEl.classList.remove('hidden')
+        
+    }
     },1000)
 }
 
