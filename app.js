@@ -52,12 +52,20 @@ const nameButtonEl = document.getElementById('name-button')
 nameButtonEl.addEventListener('click', function (){
 const displayName = document.getElementsByClassName("name-display")
 const capyName = document.getElementById("capy-name-input")
-for (let i=0; i<displayName.length;i++) //change displayname span class to user input
-{
-    displayName[i].textContent=capyName.value
-}
 newName=capyName.value
-capyName.value=""
+if (newName != "")
+{
+    for (let i=0; i<displayName.length;i++) //change displayname span class to user input
+    {
+    displayName[i].textContent=capyName.value
+    }    
+    capyName.value=""
+    startGame()    
+}
+else{    
+    alert("You must enter a name.")
+}
+
 })
 /*
 todo:
@@ -65,6 +73,12 @@ add age
 add images
 add buttons
  */
+
+function resetGame(obj){
+    obj.hungerLevel = 100
+    obj.sleepLevel = 100
+    obj.happyLevel = 100    
+}
 function startGame(){ 
     const hungerMeter = document.getElementById('hunger-bar')
     const sleepMeter = document.getElementById('sleep-bar')
@@ -72,6 +86,7 @@ function startGame(){
     const hungerVal = document.getElementById('hunger-val')
     const sleepVal = document.getElementById('sleep-val')
     const happyVal = document.getElementById('happy-val')
+    const resetBut = document.getElementById('reset')
 
     
     const inputEl = document.getElementById('name-getter')
@@ -96,22 +111,14 @@ function startGame(){
     {
         clearInterval(run)
         deathEl.classList.remove('hidden')
-        
+        resetBut.addEventListener('click', function(){
+            resetGame(newCapyPal)
+            deathEl.classList.add('hidden')
+            startGame()
+        })        
     }
     },1000)
 }
 
-let gameInterval = setInterval(() => {    
-    if (newName != "")
-    {
-        startGame()
-        clearInterval(gameInterval)        
-    }    
-}, 1000);
 
-
-
-
-//function startgame
-// old tictacto stuff
 
