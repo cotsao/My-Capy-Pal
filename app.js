@@ -60,18 +60,35 @@ for (let i=0; i<displayName.length;i++)
 newName=capyName.value
 capyName.value=""
 })
-const hungerMeter = document.getElementById('hunger-bar')
-const sleepMeter = document.getElementById('sleep-bar')
-const happyMeter = document.getElementById('happy-bar')
 
-const newCapyPal = new CapyPal(newName)
+function startGame(){
+    const hungerMeter = document.getElementById('hunger-bar')
+    const sleepMeter = document.getElementById('sleep-bar')
+    const happyMeter = document.getElementById('happy-bar')
 
-newCapyPal.hungerDrain()
-newCapyPal.sleepDrain()
-newCapyPal.happyDrain()
-let run = setInterval(function(){
-    hungerMeter.value=newCapyPal.hungerLevel
-    sleepMeter.value=newCapyPal.sleepLevel
-    happyMeter.value=newCapyPal.happyLevel
-},1000)
+    const newCapyPal = new CapyPal(newName)
+
+    newCapyPal.hungerDrain()
+    newCapyPal.sleepDrain()
+    newCapyPal.happyDrain()
+    let run = setInterval(function(){
+        hungerMeter.value=newCapyPal.hungerLevel
+        sleepMeter.value=newCapyPal.sleepLevel
+        happyMeter.value=newCapyPal.happyLevel
+    },1000)
+}
+
+let gameInterval = setInterval(() => {    
+    if (newName != "")
+    {
+        startGame()
+        clearInterval(gameInterval)        
+    }    
+}, 1000);
+
+
+
+
+//function startgame
+// old tictacto stuff
 
