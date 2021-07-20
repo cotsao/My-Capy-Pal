@@ -6,20 +6,21 @@ class CapyPal{
         this.sleepLevel = 100
     }
     hungerDrain()
-    {
-        setInterval(function(){ //drains 0-5 hunger every second
-            this.hungerLevel -=Math.floor(Math.random()*5)
+    {   
+        setInterval(() =>{ //drains 0-5 hunger every second
+            this.hungerLevel -= Math.floor(Math.random()*5)
+            
         }, 1000)
     }
     happyDrain()
     {
-        setInterval(function(){ //drains 0-5 happy level every second
+        setInterval(() =>{ //drains 0-5 happy level every second
             this.happyLevel -=Math.floor(Math.random()*5)
         },1000)
     }
     sleepDrain()
     {
-        setInterval(function(){ //drains 0-5 sleep level every second
+        setInterval(() =>{ //drains 0-5 sleep level every second
             this.sleepLevel -=Math.floor(Math.random()*5)
         },1000)
     }
@@ -59,6 +60,18 @@ for (let i=0; i<displayName.length;i++)
 newName=capyName.value
 capyName.value=""
 })
+const hungerMeter = document.getElementById('hunger-bar')
+const sleepMeter = document.getElementById('sleep-bar')
+const happyMeter = document.getElementById('happy-bar')
 
 const newCapyPal = new CapyPal(newName)
+
+newCapyPal.hungerDrain()
+newCapyPal.sleepDrain()
+newCapyPal.happyDrain()
+let run = setInterval(function(){
+    hungerMeter.value=newCapyPal.hungerLevel
+    sleepMeter.value=newCapyPal.sleepLevel
+    happyMeter.value=newCapyPal.happyLevel
+},1000)
 
