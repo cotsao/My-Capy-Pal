@@ -7,10 +7,13 @@
     <title>My CapyPal</title>
     <script defer src="app.js"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+        </style> 
 </head>
 <body>
     <div class="header">
-        <h1>My Capy Pal</h1>
+        <h1>My CapyPal</h1>
         <p></p>
     </div>
     <div id="name-getter">
@@ -24,28 +27,31 @@
             <input type="submit" value="Make your new CapyPal">            
         </form>  -->
     </div>
-    <div id="game-header">
-        <h1 class="name-display"></h1>
-        <img id="capy-boi" src="" alt="">
-    </div>
-    <div id="rules">
-        <h2>Keep <span class="name-display"></span> alive by keeping hunger, boredom, and exhaustion levels above zero.</h2>
-    </div>
+    <div id="game-header" class="hidden">
+        <h1 >the life and times of <span class="name-display "></span></h1>
+        <img id="capy-boi" src="https://stickershop.line-scdn.net/stickershop/v1/sticker/6241/android/sticker.png;compress=true" alt="">
+    </div>    
     <div id="game-board">
         <div class="value-meter"> <!-- hunger -->
             <p>hunger: <span id="hunger-val"></span></p>
             <progress id="hunger-bar" value="" max="100">
             </progress>
+            <br>
+            <button id="feed-btn">eat</button>
         </div>
         <div class="value-meter"> <!-- sleep -->
             <p>exhaustion: <span id="sleep-val"></span></p>
             <progress id="sleep-bar" value="" max="100">
             </progress>
+            <br>
+            <button id="sleep-btn">sleep</button>
         </div>
         <div class="value-meter"> <!-- boredom -->
             <p>happiness: <span id="happy-val"></span></p>
             <progress id="happy-bar" value="" max="100">
             </progress>
+            <br>
+            <button id="play-btn">play</button>
         </div>
     </div>
     <div id="death" class="hidden">
