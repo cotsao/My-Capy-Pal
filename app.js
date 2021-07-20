@@ -85,11 +85,13 @@ add age
 add images
 add buttons
  */
-
+let count = 0
 function resetGame(obj){
     obj.hungerLevel = 100
     obj.sleepLevel = 100
-    obj.happyLevel = 100    
+    obj.happyLevel = 100  
+    obj.age = 0  
+    count =0
 }
 function startGame(){ 
 //#region html constants 
@@ -103,6 +105,7 @@ function startGame(){
     const addHunger = document.getElementById('feed-btn')
     const addSleep = document.getElementById('sleep-btn')
     const addHappy = document.getElementById('play-btn')
+    const ageEl = document.getElementById('capy-age')
 //#endregion
     
     const inputEl = document.getElementById('name-getter')
@@ -130,7 +133,12 @@ function startGame(){
         hungerVal.textContent = newCapyPal.hungerLevel
         sleepVal.textContent =newCapyPal.sleepLevel
         happyVal.textContent =newCapyPal.happyLevel
-
+        ageEl.textContent= newCapyPal.age
+        
+        count++
+        if(count%10 ===0){
+            newCapyPal.age++
+        }
         
         
         
