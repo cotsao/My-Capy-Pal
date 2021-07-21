@@ -13,19 +13,22 @@ class CapyPal{
             bored: [],
             hungry: [],
             normal: [],
-            tired: []
+            tired: [],
+            dead: []
         },
         mid: {
             bored: [],
             hungry: [],
             normal: [],
-            tired: []
+            tired: [],
+            dead: []
         },
         young: {
             bored: [],
             hungry: [],
             normal: [],
-            tired: []
+            tired: [],
+            dead: []
         },
     }
     static capyStates = {
@@ -41,6 +44,45 @@ class CapyPal{
         young: "young"
     }
 //#region capypalmethods
+    setImage(){
+        const capyImage = CapyPal.capyImages
+        const tempObj = {}
+        const tempArr = []
+        switch(true){
+            case this.stage = "old":
+                tempObj = capyImage.old
+                break
+            case this.stage = "adult":
+                tempObj = capyImage.mid
+                break
+            case this.stage = "young":
+                tempObj = capyImage.young
+                break
+        }
+        switch(true){
+            case this.state = "bored":
+                tempArr = tempObj.bored
+                return tempArr[Math.floor(Math.random()*tempArr.length)]
+                break
+            case this.state = "hungry":
+                tempArr = tempObj.hungry
+                return tempArr[Math.floor(Math.random()*tempArr.length)]
+                break
+            case this.state = "normal":
+                tempArr = tempObj.normal
+                return tempArr[Math.floor(Math.random()*tempArr.length)]
+                break
+            case this.state = "tired":
+                tempArr = tempObj.tired
+                return tempArr[Math.floor(Math.random()*tempArr.length)]
+                break
+            case this.state = "dead":
+                tempArr = tempObj.dead
+                return tempArr[Math.floor(Math.random()*tempArr.length)]
+                break
+        }
+
+    }
     setState(){
         const capyState = CapyPal.capyStates
         const rand = Math.floor(Math.random()*100)
@@ -139,7 +181,7 @@ class CapyPal{
     }
     isCapyDead()
     {
-        if (this.hungerLevel <= 0 || this.happyLevel <= 0 || this.sleepLevel <= 0)
+        if (this.state === "dead")
         {
             return true
         }
@@ -207,6 +249,9 @@ class Game{
             domElements.values.happyVal.textContent =this.animalObj.happyLevel
             domElements.values.ageVal.textContent= this.animalObj.age
          
+            this.animalObj.setStage()
+            this.animalObj.setState()
+            console.log(this.animalObj.stage + " " + this.animalObj.state)
             this.count++
             if(this.count%10 ===0){
                 this.animalObj.age++
@@ -245,7 +290,7 @@ domElements.nameDiv.nameButtonEl.addEventListener('click', function(){
         newGame.startGame()
         newCapyPal.setStage()
         newCapyPal.setState()
-        console.log(newCapyPal.stage + " " + newCapyPal.state)
+        
     }
 })
 domElements.buttons.addHunger.addEventListener('click', function(){
