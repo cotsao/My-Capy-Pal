@@ -57,6 +57,7 @@ class CapyPal{
 }
 
 
+
 let newName = ""
 const nameButtonEl = document.getElementById('name-button')
 nameButtonEl.addEventListener('click', function (){
@@ -64,6 +65,7 @@ const displayName = document.getElementsByClassName("name-display")
 const capyName = document.getElementById("capy-name-input")
 newName=capyName.value
 const header = document.getElementById('game-header')
+
 if (newName != "")
 {
     for (let i=0; i<displayName.length;i++) //change displayname span class to user input
@@ -71,6 +73,7 @@ if (newName != "")
     displayName[i].textContent=capyName.value
     }
     header.classList.remove('hidden')    
+
     capyName.value=""
     startGame()    
 }
@@ -108,7 +111,7 @@ function startGame(){
     const ageEl = document.getElementById('capy-age')
 //#endregion
     
-    const inputEl = document.getElementById('name-getter')
+    const inputEl = document.getElementById('name-div')
     inputEl.classList.add('hidden') // hide user input section
 
     const deathEl =document.getElementById('death')
@@ -134,7 +137,7 @@ function startGame(){
         sleepVal.textContent =newCapyPal.sleepLevel
         happyVal.textContent =newCapyPal.happyLevel
         ageEl.textContent= newCapyPal.age
-        
+
         count++
         if(count%10 ===0){
             newCapyPal.age++

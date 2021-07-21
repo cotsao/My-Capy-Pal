@@ -23,3 +23,14 @@ body{
     height:300px; */
   /*   background-color: bisque; */
 }
+progress{
+    color:bisque;
+}
+
+#name-getter{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    
+}
