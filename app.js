@@ -4,8 +4,99 @@ class CapyPal{
         this.happyLevel = 100
         this.sleepLevel = 100
         this.age = 0
+        this.image = null
+        this.state = null
+        this.stage = null
+    }
+    static capyImages = {
+        old: {
+            bored: [],
+            hungry: [],
+            normal: [],
+            tired: []
+        },
+        mid: {
+            bored: [],
+            hungry: [],
+            normal: [],
+            tired: []
+        },
+        young: {
+            bored: [],
+            hungry: [],
+            normal: [],
+            tired: []
+        },
+    }
+    static capyStates = {
+        bored: "bored",
+        hungry: "hungry",
+        normal: "normal",
+        tired: "tired",
+        dead: "dead"
+    }
+    static capyStages = {
+        old: "old",
+        mid: "adult",
+        young: "young"
     }
 //#region capypalmethods
+    setState(){
+        const capyState = CapyPal.capyStates
+        const rand = Math.floor(Math.random()*100)
+        switch(true){
+            case this.hungerLevel <= 0 || this.happyLevel <= 0 || this.sleepLevel <= 0 || this.age >= (10 +Math.floor(Math.random()* 5)):
+                this.state = capyState.dead
+                break;
+            case this.hungerLevel >= 50 && this.happyLevel >= 50 && this.sleepLevel >= 50:
+                this.state = capyState.normal
+                break
+            case this.hungerLevel <= 50 && this.happyLevel <= 50:                
+                if (rand %2 ===0){
+                    this.state = capyState.hungry
+                }
+                else
+                this.state = capyState.bored
+                break
+            case this.happyLevel <= 50 && this.sleepLevel <= 50:
+                if (rand %2 ===0){
+                    this.state = capyState.tired
+                }
+                else
+                this.state = capyState.bored
+                break
+            case this.hungerLevel <= 50 && this.sleepLevel <= 50:
+                if (rand %2 ===0){
+                    this.state = capyState.hungry
+                }
+                else
+                this.state = capyState.tired
+                break
+            case this.hungerLevel <= 50:
+                this.state = capyState.hungry
+                break
+            case this.happyLevel <= 50:
+                this.state = capyState.bored
+                break
+            case this.sleepLevel <= 50:
+                this.state = capyState.tired
+                break
+        }
+    }
+    setStage(){
+        const capyStage = CapyPal.capyStages
+        switch(true){ //young
+            case this.age >=0 && this.age < 2:
+                this.stage=capyStage.young
+                break;
+            case this.age >= 2 && this.age < 7:
+                this.stage = capyStage.mid
+                break;
+            case this.age >=7:
+                this.stage = capyStage.old
+                break;                
+        }
+    }
     hungerDrain()
     {   
         setInterval(() =>{ //drains 0-5 hunger every second
@@ -152,6 +243,9 @@ const newGame = new Game(newCapyPal)
 domElements.nameDiv.nameButtonEl.addEventListener('click', function(){
     if(newGame.createChar()){
         newGame.startGame()
+        newCapyPal.setStage()
+        newCapyPal.setState()
+        console.log(newCapyPal.stage + " " + newCapyPal.state)
     }
 })
 domElements.buttons.addHunger.addEventListener('click', function(){
@@ -168,21 +262,5 @@ domElements.deathDiv.resetBut.addEventListener('click', function(){
     newGame.startGame()
     domElements.hideEl(domElements.deathDiv.deathEl)
 })
-
-
-
-
-
-
-/* function startGame(){   
-    inputEl.classList.add('hidden') // hide user input section
-    const 
-    const newCapyPal = new CapyPal(newName)
-
-    
-   
-    
-} */
-
 
 
