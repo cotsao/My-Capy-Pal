@@ -10,25 +10,30 @@ class CapyPal{
     }
     static capyImages = {
         old: {
-            bored: [],
+            /* bored: [],
             hungry: [],
             normal: [],
             tired: [],
-            dead: []
+            dead: [] */
+            bored: ["adult/sad.png"],
+            hungry: ["adult/hungry.png"],
+            normal: ["adult/normal.png"],
+            tired: ["adult/tired.png"],
+            dead: ["adult/ded.png"]
         },
         mid: {
-            bored: [],
-            hungry: [],
-            normal: [],
-            tired: [],
-            dead: []
+            bored: ["adult/sad.png"],
+            hungry: ["adult/hungry.png"],
+            normal: ["adult/normal.png"],
+            tired: ["adult/tired.png"],
+            dead: ["adult/ded.png"]            
         },
         young: {
-            bored: [],
-            hungry: [],
-            normal: [],
-            tired: [],
-            dead: []
+            bored: ["adult/sad.png"],
+            hungry: ["adult/hungry.png"],
+            normal: ["adult/normal.png"],
+            tired: ["adult/tired.png"],
+            dead: ["adult/ded.png"]            
         },
     }
     static capyStates = {
@@ -44,44 +49,57 @@ class CapyPal{
         young: "young"
     }
 //#region capypalmethods
-    setImage(){
+    getImage(){
         const capyImage = CapyPal.capyImages
-        const tempObj = {}
-        const tempArr = []
-        switch(true){
+        let tempObj = {}
+        let tempArr = null
+
+        if (this.stage === "old"){
+            Object.assign( tempObj, capyImage.old )
+        } 
+        else if (this.stage === "adult" ){
+            Object.assign(tempObj,capyImage.mid)
+        }
+        else if (this.stage === "young"){
+            Object.assign(tempObj,capyImage.young)
+        }
+      /*   switch(true){
             case this.stage = "old":
-                tempObj = capyImage.old
+                Object.assign(tempObj,capyImage.old)
                 break
             case this.stage = "adult":
-                tempObj = capyImage.mid
+                Object.assign(tempObj,capyImage.mid)
                 break
             case this.stage = "young":
-                tempObj = capyImage.young
+                Object.assign(tempObj,capyImage.young)
                 break
-        }
+        } */
         switch(true){
-            case this.state = "bored":
+            case this.state === "bored":
                 tempArr = tempObj.bored
                 return tempArr[Math.floor(Math.random()*tempArr.length)]
                 break
-            case this.state = "hungry":
+            case this.state === "hungry":
                 tempArr = tempObj.hungry
                 return tempArr[Math.floor(Math.random()*tempArr.length)]
                 break
-            case this.state = "normal":
+            case this.state === "normal":
                 tempArr = tempObj.normal
                 return tempArr[Math.floor(Math.random()*tempArr.length)]
                 break
-            case this.state = "tired":
+            case this.state === "tired":
                 tempArr = tempObj.tired
                 return tempArr[Math.floor(Math.random()*tempArr.length)]
                 break
-            case this.state = "dead":
+            case this.state === "dead":
                 tempArr = tempObj.dead
                 return tempArr[Math.floor(Math.random()*tempArr.length)]
                 break
         }
-
+    }
+    setImage(node,str)
+    {   let tempstr = "images/capy_pics/" + str
+        node.src=tempstr
     }
     setState(){
         const capyState = CapyPal.capyStates
@@ -127,16 +145,14 @@ class CapyPal{
     }
     setStage(){
         const capyStage = CapyPal.capyStages
-        switch(true){ //young
-            case this.age >=0 && this.age < 2:
-                this.stage=capyStage.young
-                break;
-            case this.age >= 2 && this.age < 7:
-                this.stage = capyStage.mid
-                break;
-            case this.age >=7:
-                this.stage = capyStage.old
-                break;                
+        if (this.age >=0 && this.age < 2){
+            this.stage=capyStage.young
+        }
+        else if(this.age >= 2 && this.age < 7){
+            this.stage = capyStage.mid
+        }
+        else if(this.age >=7){
+            this.stage = capyStage.old
         }
     }
     hungerDrain()
@@ -217,6 +233,9 @@ const domElements = {
         deathEl: document.getElementById('death'),
         resetBut: document.getElementById('reset')
     },
+    images:{
+        capyPic: document.getElementById('capy-boi')
+    },
     hideEl: function(el){
         el.classList.add('hidden')
     },
@@ -240,7 +259,8 @@ class Game{
         this.animalObj.hungerDrain()
         this.animalObj.sleepDrain()
         this.animalObj.happyDrain()
-        let run = setInterval(() =>{
+        domElements.images.capyPic.src="https://render.fineartamerica.com/images/rendered/square-product/small/images/artworkimages/mediumlarge/3/capybara-cabernet-will-bullas.jpg"
+                let run = setInterval(() =>{
             domElements.meters.hungerMeter.value=this.animalObj.hungerLevel
             domElements.meters.sleepMeter.value=this.animalObj.sleepLevel
             domElements.meters.happyMeter.value=this.animalObj.happyLevel
@@ -251,7 +271,8 @@ class Game{
          
             this.animalObj.setStage()
             this.animalObj.setState()
-            console.log(this.animalObj.stage + " " + this.animalObj.state)
+            
+            this.animalObj.setImage(domElements.images.capyPic, this.animalObj.getImage())
             this.count++
             if(this.count%10 ===0){
                 this.animalObj.age++
