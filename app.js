@@ -1,11 +1,11 @@
 class CapyPal{
-    constructor(name){ //
-        this.name =name
+    constructor(){ 
         this.hungerLevel = 100
         this.happyLevel = 100
         this.sleepLevel = 100
         this.age = 0
     }
+//#region capypalmethods
     hungerDrain()
     {   
         setInterval(() =>{ //drains 0-5 hunger every second
@@ -54,109 +54,135 @@ class CapyPal{
         }
         else return false
     }
-}
-
-
-
-let newName = ""
-const nameButtonEl = document.getElementById('name-button')
-nameButtonEl.addEventListener('click', function (){
-const displayName = document.getElementsByClassName("name-display")
-const capyName = document.getElementById("capy-name-input")
-newName=capyName.value
-const header = document.getElementById('game-header')
-
-if (newName != "")
-{
-    for (let i=0; i<displayName.length;i++) //change displayname span class to user input
-    {
-    displayName[i].textContent=capyName.value
-    }
-    header.classList.remove('hidden')    
-
-    capyName.value=""
-    startGame()    
-}
-else{    
-    alert("You must enter a name.")
-}
-
-})
-/*
-todo:
-add age 
-add images
-add buttons
- */
-let count = 0
-function resetGame(obj){
-    obj.hungerLevel = 100
-    obj.sleepLevel = 100
-    obj.happyLevel = 100  
-    obj.age = 0  
-    count =0
-}
-function startGame(){ 
-//#region html constants 
-    const hungerMeter = document.getElementById('hunger-bar')
-    const sleepMeter = document.getElementById('sleep-bar')
-    const happyMeter = document.getElementById('happy-bar')
-    const hungerVal = document.getElementById('hunger-val')
-    const sleepVal = document.getElementById('sleep-val')
-    const happyVal = document.getElementById('happy-val')
-    const resetBut = document.getElementById('reset')
-    const addHunger = document.getElementById('feed-btn')
-    const addSleep = document.getElementById('sleep-btn')
-    const addHappy = document.getElementById('play-btn')
-    const ageEl = document.getElementById('capy-age')
 //#endregion
-    
-    const inputEl = document.getElementById('name-div')
-    inputEl.classList.add('hidden') // hide user input section
+}
+const domElements = {
+    meters: {
+        hungerMeter: document.getElementById('hunger-bar'),
+        sleepMeter: document.getElementById('sleep-bar'),
+        happyMeter: document.getElementById('happy-bar'),
+    },
+    buttons: {
+        addHunger: document.getElementById('feed-btn'),
+        addSleep: document.getElementById('sleep-btn'),
+        addHappy: document.getElementById('play-btn')        
+    },
+    values: {
+        hungerVal: document.getElementById('hunger-val'),
+        sleepVal: document.getElementById('sleep-val'),
+        happyVal: document.getElementById('happy-val'),
+        ageVal: document.getElementById('capy-age')
+    },
+    nameDiv: {
+        inputEl: document.getElementById('name-div'),
+        nameButtonEl: document.getElementById('name-button'),
+        displayName: document.getElementsByClassName("name-display"),
+        aniName: document.getElementById("capy-name-input"),
+        header: document.getElementById('game-header')
+    },
+    deathDiv:{
+        deathEl: document.getElementById('death'),
+        resetBut: document.getElementById('reset')
+    },
+    hideEl: function(el){
+        el.classList.add('hidden')
+    },
+    showEl: function(el){
+        el.classList.remove('hidden')
+    }
+}
+class Game{
+    constructor(aniObj){
+        this.count = 0
+        this.animalObj = aniObj
+    }
+    resetGame(){
+        this.animalObj.hungerLevel = 100
+        this.animalObj.sleepLevel = 100
+        this.animalObj.happyLevel = 100  
+        this.animalObj.age = 0  
+        this.count =0
+    }
+    startGame(){
+        this.animalObj.hungerDrain()
+        this.animalObj.sleepDrain()
+        this.animalObj.happyDrain()
+        let run = setInterval(() =>{
+            domElements.meters.hungerMeter.value=this.animalObj.hungerLevel
+            domElements.meters.sleepMeter.value=this.animalObj.sleepLevel
+            domElements.meters.happyMeter.value=this.animalObj.happyLevel
+            domElements.values.hungerVal.textContent = this.animalObj.hungerLevel
+            domElements.values.sleepVal.textContent =this.animalObj.sleepLevel
+            domElements.values.happyVal.textContent =this.animalObj.happyLevel
+            domElements.values.ageVal.textContent= this.animalObj.age
+         
+            this.count++
+            if(this.count%10 ===0){
+                this.animalObj.age++
+            }
+            if (this.animalObj.isCapyDead()){ //capy dies, stop interval
+                clearInterval(run)
+                domElements.showEl(domElements.deathDiv.deathEl)        
+            }
+        },1000)
+    }
+    createChar(){
+        let bool = false
+        let newName = ""        
+        newName=domElements.nameDiv.aniName.value  
+        if (newName != ""){
+            for (let i=0; i<domElements.nameDiv.displayName.length;i++){//change displaname span class to user input
+                domElements.nameDiv.displayName[i].textContent=domElements.nameDiv.aniName.value
+            }
+            domElements.showEl(domElements.nameDiv.header) 
+            domElements.nameDiv.aniName.value=""
+            domElements.hideEl(domElements.nameDiv.inputEl)
+            bool = true
+            return bool                
+        }
+        else{    
+            alert("You must enter a name.")
+            return bool
+            }
+    }        
+}
 
-    const deathEl =document.getElementById('death')
+const newCapyPal = new CapyPal()
+const newGame = new Game(newCapyPal)
+domElements.nameDiv.nameButtonEl.addEventListener('click', function(){
+    if(newGame.createChar()){
+        newGame.startGame()
+    }
+})
+domElements.buttons.addHunger.addEventListener('click', function(){
+    newCapyPal.feed()
+})
+domElements.buttons.addSleep.addEventListener('click',function(){
+    newCapyPal.sleep()
+})
+domElements.buttons.addHappy.addEventListener('click',function(){
+    newCapyPal.play()
+})
+domElements.deathDiv.resetBut.addEventListener('click', function(){
+    newGame.resetGame()
+    newGame.startGame()
+    domElements.hideEl(domElements.deathDiv.deathEl)
+})
+
+
+
+
+
+
+/* function startGame(){   
+    inputEl.classList.add('hidden') // hide user input section
+    const 
     const newCapyPal = new CapyPal(newName)
 
-    newCapyPal.hungerDrain()
-    newCapyPal.sleepDrain()
-    newCapyPal.happyDrain()
-    addHunger.addEventListener('click', function(){
-        newCapyPal.feed()
-    })
-    addSleep.addEventListener('click',function(){
-        newCapyPal.sleep()
-    })
-    addHappy.addEventListener('click',function(){
-        newCapyPal.play()
-    })
-    let run = setInterval(function(){
-        hungerMeter.value=newCapyPal.hungerLevel
-        sleepMeter.value=newCapyPal.sleepLevel
-        happyMeter.value=newCapyPal.happyLevel
-        hungerVal.textContent = newCapyPal.hungerLevel
-        sleepVal.textContent =newCapyPal.sleepLevel
-        happyVal.textContent =newCapyPal.happyLevel
-        ageEl.textContent= newCapyPal.age
-
-        count++
-        if(count%10 ===0){
-            newCapyPal.age++
-        }
-        
-        
-        
-         if (newCapyPal.isCapyDead()) //capy dies, stop interval
-         {
-             clearInterval(run)
-             deathEl.classList.remove('hidden')
-              resetBut.addEventListener('click', function(){
-             resetGame(newCapyPal)
-             deathEl.classList.add('hidden')
-                startGame()
-          })        
-         }
-    },1000)
-}
+    
+   
+    
+} */
 
 
 
