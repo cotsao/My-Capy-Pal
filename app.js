@@ -15,11 +15,11 @@ class CapyPal{
             normal: [],
             tired: [],
             dead: [] */
-            bored: ["adult/sad.png"],
-            hungry: ["adult/hungry.png"],
-            normal: ["adult/normal.png"],
-            tired: ["adult/tired.png"],
-            dead: ["adult/ded.png"]
+            bored: ["old/sad.png"],
+            hungry: ["old/hungry.png"],
+            normal: ["old/normal.png"],
+            tired: ["old/tired.png"],
+            dead: ["old/ded.png"]
         },
         mid: {
             bored: ["adult/sad.png"],
@@ -29,11 +29,11 @@ class CapyPal{
             dead: ["adult/ded.png"]            
         },
         young: {
-            bored: ["adult/sad.png"],
-            hungry: ["adult/hungry.png"],
-            normal: ["adult/normal.png"],
-            tired: ["adult/tired.png"],
-            dead: ["adult/ded.png"]            
+            bored: ["young/sad.png"],
+            hungry: ["young/hungry.png"],
+            normal: ["young/normal.png"],
+            tired: ["young/tired.png"],
+            dead: ["young/ded.png"]            
         },
     }
     static capyStates = {
