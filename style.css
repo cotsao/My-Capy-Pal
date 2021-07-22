@@ -5,7 +5,9 @@ body{
     flex-direction: column;
     font-family: 'Caveat', cursive;
     text-align: center;
-  
+    position:relative;
+    width: 100%;
+    height: 100%;
 }
 
 .hidden {
@@ -56,12 +58,12 @@ progress{
 }
 #scoreboard{
     position:absolute;
-    width:150px;
-    height: 600px;
-    left: 0px;
-    margin-left: 25px;
-    margin-top: 25px;
-    background-color: black;
+    width:10%;
+    height: 75%;
+    top:5%;
+    left: 10%;
+    
+    
 }
 
 .fadein {

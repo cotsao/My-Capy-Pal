@@ -4,6 +4,7 @@ class CapyPal{
         this.happyLevel = 100
         this.sleepLevel = 100
         this.age = 0
+        this.name =""
         this.image = null
         this.state = null
         this.stage = null
@@ -147,7 +148,7 @@ class CapyPal{
     hungerDrain()
     {   
         setInterval(() =>{ //drains 0-5 hunger every second
-            this.hungerLevel -= Math.floor(Math.random()*5)
+            this.hungerLevel -= Math.floor(Math.random()*100)
             
         }, 1000)
     }
@@ -227,6 +228,7 @@ const domElements = {
         randImg: document.getElementById('rand-img')
     },
     boardDiv: document.getElementById('game-board'),
+    scoreboard: document.getElementById('scoreboard'),
     buttonImages:{
         feed: ["feed/img (1).png", "feed/img (2).png","feed/img (3).png"],
         sleep: ["sleep/img (1).png", "sleep/img (2).png","sleep/img (3).png"],
@@ -325,6 +327,7 @@ class Game{
             for (let i=0; i<domElements.nameDiv.displayName.length;i++){//change displaname span class to user input
                 domElements.nameDiv.displayName[i].textContent=domElements.nameDiv.aniName.value
             }
+            this.animalObj.name = newName
             domElements.showEl(domElements.nameDiv.header) 
             domElements.nameDiv.aniName.value=""
             domElements.hideEl(domElements.nameDiv.inputEl)
@@ -340,15 +343,14 @@ class Game{
 
 let newCapyPal = null
 let newGame = null
+let capyName = null
+let capyAge = null
 domElements.nameDiv.nameButtonEl.addEventListener('click', function(){
     newCapyPal = new CapyPal()
     newGame = new Game(newCapyPal)
     
-    if(newGame.createChar()){
+    if(newGame.createChar(capyName)){
         newGame.startGame()
-        newCapyPal.setStage()
-        newCapyPal.setState()
-        
     }
 })
 domElements.buttons.addHunger.addEventListener('click', function(){
@@ -364,12 +366,17 @@ domElements.buttons.addHappy.addEventListener('click',function(){
     domElements.randImage(domElements.boardDiv, domElements.buttonImages.play)
 })
 domElements.deathDiv.resetBut.addEventListener('click', function(){
-    newGame.resetGame()
+    domElements.showEl(domElements.scoreboard)
+    capyAge = newCapyPal.age
+    capyName = newCapyPal.name
+    const newScore = document.createElement('p')    
+    newScore.textContent = "you raised " + capyName + " until age " + capyAge
+    domElements.scoreboard.appendChild(newScore)
+    newGame.resetGame()    
     domElements.showEl(domElements.nameDiv.inputEl)
     domElements.hideEl(domElements.nameDiv.header) 
     domElements.hideEl(domElements.images.capyPic)
-    domElements.hideEl
-//  newGame.startGame()
+    //  newGame.startGame()
     domElements.hideEl(domElements.deathDiv.deathEl)
 })
 
