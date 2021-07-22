@@ -30,29 +30,36 @@
     <div id="game-header" class="hidden">
         <h1 >the life and times of <span class="name-display "></span></h1>
         <h1><span class="name-display "> </span> is <span id="capy-age"></span></h1>
-        <img id="capy-boi" src="" alt="">
+        
     </div>    
     <div id="game-board">
-        <div class="value-meter"> <!-- hunger -->
-            <p>hunger: <span id="hunger-val"></span></p>
-            <progress id="hunger-bar" value="" max="100">
-            </progress>
-            <br>
-            <button id="feed-btn">eat</button>
+        <img id="capy-boi" class="hidden" src="" alt="">
+        <div id="game-stats">
+            <div class="value-meter"> <!-- hunger -->
+                <p>hunger: <span id="hunger-val"></span></p>
+                <progress id="hunger-bar" value="" max="100">
+                </progress>
+                <br>
+                <button id="feed-btn">feed</button>
+            </div>
+            <div class="value-meter"> <!-- sleep -->
+                <p>exhaustion: <span id="sleep-val"></span></p>
+                <progress id="sleep-bar" value="" max="100">
+                </progress>
+                <br>
+                <button id="sleep-btn">sleep</button>
+            </div>
+            <div class="value-meter"> <!-- boredom -->
+                <p>happiness: <span id="happy-val"></span></p>
+                <progress id="happy-bar" value="" max="100">
+                </progress>
+                <br>
+                <button id="play-btn">play</button>
+            </div>
         </div>
-        <div class="value-meter"> <!-- sleep -->
-            <p>exhaustion: <span id="sleep-val"></span></p>
-            <progress id="sleep-bar" value="" max="100">
-            </progress>
-            <br>
-            <button id="sleep-btn">sleep</button>
-        </div>
-        <div class="value-meter"> <!-- boredom -->
-            <p>happiness: <span id="happy-val"></span></p>
-            <progress id="happy-bar" value="" max="100">
-            </progress>
-            <br>
-            <button id="play-btn">play</button>
+        
+        <div id="rand-img-box">
+            <img id="rand-img" src="" alt="">
         </div>
     </div>
     <div id="death" class="hidden">

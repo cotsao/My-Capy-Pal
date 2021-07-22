@@ -63,17 +63,6 @@ class CapyPal{
         else if (this.stage === "young"){
             Object.assign(tempObj,capyImage.young)
         }
-      /*   switch(true){
-            case this.stage = "old":
-                Object.assign(tempObj,capyImage.old)
-                break
-            case this.stage = "adult":
-                Object.assign(tempObj,capyImage.mid)
-                break
-            case this.stage = "young":
-                Object.assign(tempObj,capyImage.young)
-                break
-        } */
         switch(true){
             case this.state === "bored":
                 tempArr = tempObj.bored
@@ -234,15 +223,51 @@ const domElements = {
         resetBut: document.getElementById('reset')
     },
     images:{
-        capyPic: document.getElementById('capy-boi')
+        capyPic: document.getElementById('capy-boi'),
+        randImg: document.getElementById('rand-img')
+    },
+    boardDiv: document.getElementById('game-board'),
+    buttonImages:{
+        feed: ["feed/img (1).png", "feed/img (2).png","feed/img (3).png"],
+        sleep: ["sleep/img (1).png", "sleep/img (2).png","sleep/img (3).png"],
+        play: ["play/img (1).png", "play/img (2).png","play/img (3).png"]
     },
     hideEl: function(el){
         el.classList.add('hidden')
     },
     showEl: function(el){
         el.classList.remove('hidden')
+    },
+    randImage: function(parentDiv,arr){
+        let divWidth = parentDiv.offsetWidth
+        let divHeight = parentDiv.offsetHeight
+        let tempStr = "images/button_pics/" + arr[Math.floor(Math.random()*arr.length)]
+        let imgNode = document.createElement('img')
+        parentDiv.appendChild(imgNode)
+        imgNode.src = tempStr
+        imgNode.classList.add('fadein')
+        imgNode.classList.add('rand-img')
+        imgNode.style.top = Math.floor((Math.random()*divHeight)/2) +"px"
+        imgNode.style.left = Math.floor((Math.random()*divWidth)/2)+"px"
+        setTimeout(() => {
+            imgNode.remove()
+        }, (2000));
+       
+        
+      /*   setTimeout(function(){
+            node.classList.remove('fadein')
+            node.classList.add('fadeout')
+            
+        }, 1000)
+        setTimeout(function(){
+            node.classList.remove('fadeout')
+            node.classList.add('fadein')
+        },1000) */
+        /* let tempstr = "images/capy_pics/" + str
+        node.src=tempstr */
     }
 }
+
 class Game{
     constructor(aniObj){
         this.count = 0
@@ -259,6 +284,7 @@ class Game{
         this.animalObj.hungerDrain()
         this.animalObj.sleepDrain()
         this.animalObj.happyDrain()
+        domElements.showEl(domElements.images.capyPic)
         domElements.images.capyPic.src="https://render.fineartamerica.com/images/rendered/square-product/small/images/artworkimages/mediumlarge/3/capybara-cabernet-will-bullas.jpg"
                 let run = setInterval(() =>{
             domElements.meters.hungerMeter.value=this.animalObj.hungerLevel
@@ -316,12 +342,15 @@ domElements.nameDiv.nameButtonEl.addEventListener('click', function(){
 })
 domElements.buttons.addHunger.addEventListener('click', function(){
     newCapyPal.feed()
+    domElements.randImage(domElements.boardDiv, domElements.buttonImages.feed)
 })
 domElements.buttons.addSleep.addEventListener('click',function(){
     newCapyPal.sleep()
+    domElements.randImage(domElements.boardDiv, domElements.buttonImages.sleep)
 })
 domElements.buttons.addHappy.addEventListener('click',function(){
     newCapyPal.play()
+    domElements.randImage(domElements.boardDiv, domElements.buttonImages.play)
 })
 domElements.deathDiv.resetBut.addEventListener('click', function(){
     newGame.resetGame()

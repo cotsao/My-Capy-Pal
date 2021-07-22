@@ -13,7 +13,9 @@ body{
 #game-board{
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: space-between; 
+    position: relative;
 }
 .value-meter{
     margin:5px;
@@ -31,6 +33,57 @@ progress{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
     height: 100px;
     
+}
+#rand-img-box{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+}
+#game-stats{
+    display: flex;
+    flex-direction: row;
+}
+.rand-img{
+    position: absolute;
+    max-width: 35%;
+    max-height: 35%;
+    
+}
+/* .fadeout {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+  }
+.fadein{
+   visibility: visible;
+   opacity: 1;
+   transition: visibility 0s linear 0s, opacity 300ms;
+} */
+/* .fadein {
+    opacity: 1;
+    animation: fade 1s linear;
+}
+
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+} */
+.fadein {
+    -webkit-animation: fadeinout 1s linear forwards;
+    animation: fadeinout 1s linear forwards;
+}
+
+@-webkit-keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
 }
