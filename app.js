@@ -147,7 +147,7 @@ class CapyPal{
     hungerDrain()
     {   
         setInterval(() =>{ //drains 0-5 hunger every second
-            this.hungerLevel -= Math.floor(Math.random()*5)
+            this.hungerLevel -= Math.floor(Math.random()*100)
             
         }, 1000)
     }
@@ -274,11 +274,19 @@ class Game{
         this.animalObj = aniObj
     }
     resetGame(){
-        this.animalObj.hungerLevel = 100
-        this.animalObj.sleepLevel = 100
-        this.animalObj.happyLevel = 100  
+        this.animalObj.hungerLevel = ""
+        this.animalObj.sleepLevel = ""
+        this.animalObj.happyLevel = ""  
         this.animalObj.age = 0  
         this.count =0
+        domElements.meters.hungerMeter.value=this.animalObj.hungerLevel
+        domElements.meters.sleepMeter.value=this.animalObj.sleepLevel
+        domElements.meters.happyMeter.value=this.animalObj.happyLevel
+        domElements.values.hungerVal.textContent = this.animalObj.hungerLevel
+        domElements.values.sleepVal.textContent =this.animalObj.sleepLevel
+        domElements.values.happyVal.textContent =this.animalObj.happyLevel
+        domElements.values.ageVal.textContent= this.animalObj.age
+        this.animalObj=null
     }
     startGame(){
         this.animalObj.hungerDrain()
@@ -330,9 +338,12 @@ class Game{
     }        
 }
 
-const newCapyPal = new CapyPal()
-const newGame = new Game(newCapyPal)
+let newCapyPal = null
+let newGame = null
 domElements.nameDiv.nameButtonEl.addEventListener('click', function(){
+    newCapyPal = new CapyPal()
+    newGame = new Game(newCapyPal)
+    
     if(newGame.createChar()){
         newGame.startGame()
         newCapyPal.setStage()
@@ -354,7 +365,11 @@ domElements.buttons.addHappy.addEventListener('click',function(){
 })
 domElements.deathDiv.resetBut.addEventListener('click', function(){
     newGame.resetGame()
-    newGame.startGame()
+    domElements.showEl(domElements.nameDiv.inputEl)
+    domElements.hideEl(domElements.nameDiv.header) 
+    domElements.hideEl(domElements.images.capyPic)
+    domElements.hideEl
+//  newGame.startGame()
     domElements.hideEl(domElements.deathDiv.deathEl)
 })
 

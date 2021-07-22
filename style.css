@@ -54,6 +54,15 @@ progress{
     max-height: 35%;
     
 }
+#scoreboard{
+    position:absolute;
+    width:150px;
+    height: 600px;
+    left: 0px;
+    margin-left: 25px;
+    margin-top: 25px;
+    background-color: black;
+}
 
 .fadein {
     -webkit-animation: fadeinout 1s linear forwards;
