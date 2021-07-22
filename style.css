@@ -4,6 +4,7 @@ body{
     justify-content: center;
     flex-direction: column;
     font-family: 'Caveat', cursive;
+    text-align: center;
   
 }
 
@@ -53,26 +54,7 @@ progress{
     max-height: 35%;
     
 }
-/* .fadeout {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s linear 300ms, opacity 300ms;
-  }
-.fadein{
-   visibility: visible;
-   opacity: 1;
-   transition: visibility 0s linear 0s, opacity 300ms;
-} */
-/* .fadein {
-    opacity: 1;
-    animation: fade 1s linear;
-}
 
-
-@keyframes fade {
-  0%,100% { opacity: 0 }
-  50% { opacity: 1 }
-} */
 .fadein {
     -webkit-animation: fadeinout 1s linear forwards;
     animation: fadeinout 1s linear forwards;
