@@ -5,13 +5,10 @@ body{
     flex-direction: column;
     font-family: 'Caveat', cursive;
     text-align: center;
-<<<<<<< HEAD
   
-=======
     position:relative;
     width: 100%;
     height: 100%;
->>>>>>> main
 }
 .hidden {
     display: none !important;
@@ -58,8 +55,6 @@ progress{
     max-height: 35%;
     
 }
-<<<<<<< HEAD
-=======
 #scoreboard{
     position:absolute;
     width:10%;
@@ -69,7 +64,6 @@ progress{
     
     
 }
->>>>>>> main
 
 .fadein {
     -webkit-animation: fadeinout 1s linear forwards;
