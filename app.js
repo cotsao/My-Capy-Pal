@@ -148,7 +148,7 @@ class CapyPal{
     hungerDrain()
     {   
         setInterval(() =>{ //drains 0-5 hunger every second
-            this.hungerLevel -= Math.floor(Math.random()*100)
+            this.hungerLevel -= Math.floor(Math.random()*5)
             
         }, 1000)
     }
