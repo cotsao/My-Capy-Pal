@@ -379,44 +379,44 @@ const typeGame = {
             this.wordNode.appendChild(wordSpan)
         }
         chars = document.getElementsByClassName("char")
+        console.log(chars)
     },
     typeWord: function(e){
         const key = e.key
         for (let i = 0; i < this.chars.length; i++){
             if (this.chars[i].textContent === key){ //if keypress matchs char[i]
                 if(this.chars[i].classList.contains("highlight") === true){ //skip if contains
-                    continue
+                    continue;
                 }
-                else if (this.chars[i].classList.contains("highlight") === false) // includes keys not in order
+                else if ((this.chars[i].classList.contains("highlight") === false) && (this.chars[i-1] === undefined || this.chars[i-1].classList.contains("highlight")) ) // includes keys not in order
                 {
                     this.chars[i].classList.add("highlight")
-                    break
+                    break;
                 }
             }
         }
         let checker = 0
         for (let i = 0; i < this.chars.length;i++)
         {
-            if (this.chars[i].classList.contains("highlight"))
-            checker++
+            if (this.chars[i].className === "char highlight")
+            checker=checker+1
         }
         if (checker === this.chars.length)
         {
             //add bar, sticker animation
-            for (let i =0; i<this.chars.length; i++)
+            while (this.chars.length !=0)
             {
-                console.log("wow")
-                this.chars[i].remove()
+                this.chars[0].parentNode.removeChild(this.chars[0])
             }
             
         }
 
-    }
+    }// table al clock lc
 
 }
 window.addEventListener("keydown",typeGame.typeWord)
 
-console.log(typeGame.getWord())
+typeGame.getWord()
 
 //#region 
 let newCapyPal = null
