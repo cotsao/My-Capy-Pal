@@ -345,7 +345,7 @@ class Game{
 //todo
 
 const typeGame = { 
-    wordNode: document.getElementsByClassName("words"),
+    wordNode: document.getElementById("hunger-word"),
     typed: null,
     wordList: ["handle","theory","length","calm","likely","not","about","face","child","strong","map","asleep","spoken","smoke","rush","list","sale","discover","cry","indeed",
     "vessels","men","brought","everyone","health","pig","combine","goose","driving","distant","folks","suddenly","passage","saved","pack","watch","queen","useful","draw","mighty",
@@ -376,18 +376,27 @@ const typeGame = {
             let wordSpan = document.createElement("span")
             wordSpan.classList.add("char")
             wordSpan.textContent = this.wordArray[i]
-            this.wordNode[0].appendChild(wordSpan)
+            this.wordNode.appendChild(wordSpan)
         }
         chars = document.getElementsByClassName("char")
-        /* 
-        get random word
-        attach words to html
-        convert word to char array and attach to html
-         */
     },
+    typeWord: function(e){
+        const key = e.key
+        for (let i = 0; i < this.chars.length; i++){
+            if (this.chars[i].textContent === key){ //if keypress matchs char[i]
+                if(this.chars[i].classList.contains("highlight") === true){
+                    continue
+                }
+                else if (this.chars[i].classList.contains("highlight") === false) // includes keys not in order
+                {
+                    this.chars[i].classList.add("highlight")
+                }
+            }
+        }
+    }
 
 }
-
+window.addEventListener("keydown",typeGame.typeWord)
 
 console.log(typeGame.getWord())
 
