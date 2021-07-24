@@ -95,7 +95,7 @@ class CapyPal{
         const capyState = CapyPal.capyStates
         const rand = Math.floor(Math.random()*100)
         switch(true){
-            case this.hungerLevel <= 0 || this.happyLevel <= 0 || this.sleepLevel <= 0 || this.age >= (10 +Math.floor(Math.random()* 5)):
+            case this.hungerLevel <= 0 || this.happyLevel <= 0 || this.sleepLevel <= 0:
                 this.state = capyState.dead
                 break;
             case this.hungerLevel >= 50 && this.happyLevel >= 50 && this.sleepLevel >= 50:
@@ -135,13 +135,13 @@ class CapyPal{
     }
     setStage(){
         const capyStage = CapyPal.capyStages
-        if (this.age >=0 && this.age < 2){
+        if (this.age >=0 && this.age < 3){
             this.stage=capyStage.young
         }
         else if(this.age >= 2 && this.age < 7){
             this.stage = capyStage.mid
         }
-        else if(this.age >=7){
+        else if(this.age >= 12){
             this.stage = capyStage.old
         }
     }
