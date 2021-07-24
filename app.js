@@ -384,15 +384,33 @@ const typeGame = {
         const key = e.key
         for (let i = 0; i < this.chars.length; i++){
             if (this.chars[i].textContent === key){ //if keypress matchs char[i]
-                if(this.chars[i].classList.contains("highlight") === true){
+                if(this.chars[i].classList.contains("highlight") === true){ //skip if contains
                     continue
                 }
                 else if (this.chars[i].classList.contains("highlight") === false) // includes keys not in order
                 {
                     this.chars[i].classList.add("highlight")
+                    break
                 }
             }
         }
+        let checker = 0
+        for (let i = 0; i < this.chars.length;i++)
+        {
+            if (this.chars[i].classList.contains("highlight"))
+            checker++
+        }
+        if (checker === this.chars.length)
+        {
+            //add bar, sticker animation
+            for (let i =0; i<this.chars.length; i++)
+            {
+                console.log("wow")
+                this.chars[i].remove()
+            }
+            
+        }
+
     }
 
 }
