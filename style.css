@@ -76,3 +76,7 @@ progress{
   0%,100% { opacity: 0; }
   50% { opacity: 1; }
 }
+
+.highlight{
+    background-color: bisque;
+}
