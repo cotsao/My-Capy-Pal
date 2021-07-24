@@ -344,9 +344,12 @@ class Game{
 
 //todo
 
+
 class TypeGame { 
-    constructor(str){
+    constructor(str,aniObj){
         this.wordNode = document.getElementById(str+"-word")
+        this.obj = aniObj
+        this.identifier = str
         this.wordArray = null
         this.chars = null          
         document.addEventListener('keydown', e => this.typeWord(e) )
@@ -377,12 +380,12 @@ class TypeGame {
         this.wordArray = wordList[Math.floor( Math.random()*wordList.length)].split("")
         for (let i = 0; i < this.wordArray.length; i++){
             let wordSpan = document.createElement("span")
-            wordSpan.classList.add("char")
+            wordSpan.classList.add(this.identifier+"char")
             wordSpan.textContent = this.wordArray[i]
             this.wordNode.appendChild(wordSpan)
         }
-        this.chars = document.getElementsByClassName("char")
-
+        this.chars = document.getElementsByClassName(this.identifier+"char")
+        console.log(this.obj)
     }
     typeWord(e){
         const key = e.key
@@ -401,7 +404,7 @@ class TypeGame {
         let checker = 0
         for (let i = 0; i < this.chars.length;i++)
         {
-            if (this.chars[i].className === "char highlight")
+            if (this.chars[i].className ===this.identifier+ "char highlight")
             checker=checker+1
         }
         if (checker === this.chars.length)
@@ -410,17 +413,30 @@ class TypeGame {
             while (this.chars.length !=0)
             {
                 this.chars[0].parentNode.removeChild(this.chars[0])
+                
             }
-            
+            if (this.identifier === "feed")
+            {
+                this.obj.feed()
+                domElements.randImage(domElements.boardDiv, domElements.buttonImages.feed)
+            }
+            else if (this.identifier ==="play")
+            {
+                this.obj.play()
+                domElements.randImage(domElements.boardDiv, domElements.buttonImages.play)
+            }
+            else if (this.identifier ==="sleep")
+            {
+                this.obj.sleep()
+                domElements.randImage(domElements.boardDiv, domElements.buttonImages.sleep)
+            }
+            this.getWord()
         }
 
     }
 
 }
-const food = new TypeGame("hunger")
 
-
-food.getWord()
 
 //#region 
 let newCapyPal = null
@@ -430,11 +446,19 @@ let capyAge = null
 domElements.nameDiv.nameButtonEl.addEventListener('click', function(){
     newCapyPal = new CapyPal()
     newGame = new Game(newCapyPal)
-    
+    const feed = new TypeGame("feed",newCapyPal)
+    const play = new TypeGame("play",newCapyPal)
+    const sleep = new TypeGame("sleep",newCapyPal)
+    feed.getWord()
+    play.getWord()
+    sleep.getWord()
+ 
     if(newGame.createChar(capyName)){
         newGame.startGame()
     }
 })
+
+
 domElements.buttons.addHunger.addEventListener('click', function(){
     newCapyPal.feed()
     domElements.randImage(domElements.boardDiv, domElements.buttonImages.feed)
