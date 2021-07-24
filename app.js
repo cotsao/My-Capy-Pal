@@ -344,44 +344,47 @@ class Game{
 
 //todo
 
-const typeGame = { 
-    wordNode: document.getElementById("hunger-word"),
-    typed: null,
-    wordList: ["handle","theory","length","calm","likely","not","about","face","child","strong","map","asleep","spoken","smoke","rush","list","sale","discover","cry","indeed",
-    "vessels","men","brought","everyone","health","pig","combine","goose","driving","distant","folks","suddenly","passage","saved","pack","watch","queen","useful","draw","mighty",
-    "unless","skill","deep","is","special","fully","lower","paragraph","canal","terrible","floating","throughout","strike","eaten","cave","officer","of","subject","said","powerful",
-    "establish","total","heading","cabin","poet","shelf","stock","then","settle","ranch","table","hurt","blue","chain","original","drawn","service","refused","bow","pie",
-    "best","beyond","any","me","nearer","laugh","late","bent","large","graph","garage","thank","sort","blood","definition","being","struck","solid","play","heart",
-    "near","ocean","cowboy","same","everybody","dangerous","married","purple","mixture","know","up","related","important","way","came","crop","castle","cotton","raise","lack",
-    "rain","liquid","not","running","example","younger","pilot","bottle","size","shot","recent","studying","correct","experience","warm","thus","discuss","can","flame","person",
-    "might","hardly","pretty","structure","clear","who","around","better","queen","trunk","hang","unknown","stems","widely","old","gun","unhappy","muscle","but","grow",
-    "find","wall","announced","carried","eight","disease","measure","touch","ride","crop","least","letter","space","bad","apartment","shinning","fighting","least","citizen","has",
-    "tune","earth","applied","appropriate","fruit","conversation","line","studying","oldest","being","love","tin","obtain","shells","citizen","repeat","swept","city","threw","record",
-    "frequently","done","clean","husband","offer","smallest","exact","instant","journey","citizen","tax","balance","piano","protection","badly","brain","modern","cry","knife","character",
-    "gather","rope","tonight","rear","environment","poor","coffee","war","leather","broken","vessels","begun","gave","aware","tired","chain","road","jungle","evidence","farther",
-    "variety","avoid","research","forget","mill","tube","school","shore","receive","habit","tube","carefully","build","clothing","weather","view","rest","solution","alive","tree",
-    "review","applied","quite","plenty","kill","anything","west","examine","paper","closer","occur","molecular","tin","catch","putting","job","caught","memory","modern","graph",
-    "model","directly","familiar","positive","grandfather","sides","from","became","several","separate","reason","knowledge","verb","mainly","molecular","on","negative","closely","mental","carried",
-    "palace","ranch","wore","combine","people","street","theory","salt","studying","immediately","union","consist","missing","saved","tired","market","coal","doubt","wind","remarkable",
-    "grow","blew","kill","shallow","cutting","theory","perfect","between","feet","recall","pull","hurt","especially","draw","dog","future","scared","cast","ball","atomic",
-    "believed","ranch","wagon","fireplace","longer","again","region","or","these","paint","observe","circus","available","cage","atom","officer","recent","moon","water","engineer",
-    "planet","sister","establish","riding","watch","warm","war","purpose","column","facing","herd","private","war","type","front","dried","electric","many","climate","beginning",
-    "bit","money","dot","clock","compound","see","pour","follow","dark","period","voyage","fur","standard","chief","reach","fill","suddenly","sentence","excited","shake",
-    "seen","wool","point","brush","line","cloud","at","ready","greatly","learn","save","comfortable","then","she","particularly","truth","cutting","arrange","future","term"],
-    wordArray: null,
-    chars: null,
-    getWord: function (){
-        this.wordArray = this.wordList[Math.floor( Math.random()*this.wordList.length)].split("")
+class TypeGame { 
+    constructor(str){
+        this.wordNode = document.getElementById(str+"-word")
+        this.wordArray = null
+        this.chars = null          
+        document.addEventListener('keydown', e => this.typeWord(e) )
+}
+    static wordLists = ["handle","theory","length","calm","likely","not","about","face","child","strong","map","asleep","spoken","smoke","rush","list","sale","discover","cry","indeed",
+"vessels","men","brought","everyone","health","pig","combine","goose","driving","distant","folks","suddenly","passage","saved","pack","watch","queen","useful","draw","mighty",
+"unless","skill","deep","is","special","fully","lower","paragraph","canal","terrible","floating","throughout","strike","eaten","cave","officer","of","subject","said","powerful",
+"establish","total","heading","cabin","poet","shelf","stock","then","settle","ranch","table","hurt","blue","chain","original","drawn","service","refused","bow","pie",
+"best","beyond","any","me","nearer","laugh","late","bent","large","graph","garage","thank","sort","blood","definition","being","struck","solid","play","heart",
+"near","ocean","cowboy","same","everybody","dangerous","married","purple","mixture","know","up","related","important","way","came","crop","castle","cotton","raise","lack",
+"rain","liquid","not","running","example","younger","pilot","bottle","size","shot","recent","studying","correct","experience","warm","thus","discuss","can","flame","person",
+"might","hardly","pretty","structure","clear","who","around","better","queen","trunk","hang","unknown","stems","widely","old","gun","unhappy","muscle","but","grow",
+"find","wall","announced","carried","eight","disease","measure","touch","ride","crop","least","letter","space","bad","apartment","shinning","fighting","least","citizen","has",
+"tune","earth","applied","appropriate","fruit","conversation","line","studying","oldest","being","love","tin","obtain","shells","citizen","repeat","swept","city","threw","record",
+"frequently","done","clean","husband","offer","smallest","exact","instant","journey","citizen","tax","balance","piano","protection","badly","brain","modern","cry","knife","character",
+"gather","rope","tonight","rear","environment","poor","coffee","war","leather","broken","vessels","begun","gave","aware","tired","chain","road","jungle","evidence","farther",
+"variety","avoid","research","forget","mill","tube","school","shore","receive","habit","tube","carefully","build","clothing","weather","view","rest","solution","alive","tree",
+"review","applied","quite","plenty","kill","anything","west","examine","paper","closer","occur","molecular","tin","catch","putting","job","caught","memory","modern","graph",
+"model","directly","familiar","positive","grandfather","sides","from","became","several","separate","reason","knowledge","verb","mainly","molecular","on","negative","closely","mental","carried",
+"palace","ranch","wore","combine","people","street","theory","salt","studying","immediately","union","consist","missing","saved","tired","market","coal","doubt","wind","remarkable",
+"grow","blew","kill","shallow","cutting","theory","perfect","between","feet","recall","pull","hurt","especially","draw","dog","future","scared","cast","ball","atomic",
+"believed","ranch","wagon","fireplace","longer","again","region","or","these","paint","observe","circus","available","cage","atom","officer","recent","moon","water","engineer",
+"planet","sister","establish","riding","watch","warm","war","purpose","column","facing","herd","private","war","type","front","dried","electric","many","climate","beginning",
+"bit","money","dot","clock","compound","see","pour","follow","dark","period","voyage","fur","standard","chief","reach","fill","suddenly","sentence","excited","shake",
+"seen","wool","point","brush","line","cloud","at","ready","greatly","learn","save","comfortable","then","she","particularly","truth","cutting","arrange","future","term"]
+    getWord(){
+        const wordList = TypeGame.wordLists
+        this.wordArray = wordList[Math.floor( Math.random()*wordList.length)].split("")
         for (let i = 0; i < this.wordArray.length; i++){
             let wordSpan = document.createElement("span")
             wordSpan.classList.add("char")
             wordSpan.textContent = this.wordArray[i]
             this.wordNode.appendChild(wordSpan)
         }
-        chars = document.getElementsByClassName("char")
-        console.log(chars)
-    },
-    typeWord: function(e){
+        this.chars = document.getElementsByClassName("char")
+
+    }
+    typeWord(e){
         const key = e.key
         for (let i = 0; i < this.chars.length; i++){
             if (this.chars[i].textContent === key){ //if keypress matchs char[i]
@@ -411,12 +414,13 @@ const typeGame = {
             
         }
 
-    }// table al clock lc
+    }
 
 }
-window.addEventListener("keydown",typeGame.typeWord)
+const food = new TypeGame("hunger")
 
-typeGame.getWord()
+
+food.getWord()
 
 //#region 
 let newCapyPal = null
