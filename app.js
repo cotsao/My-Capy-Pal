@@ -95,7 +95,7 @@ class CapyPal{
         const capyState = CapyPal.capyStates
         const rand = Math.floor(Math.random()*100)
         switch(true){
-            case this.hungerLevel <= 0 || this.happyLevel <= 0 || this.sleepLevel <= 0 || this.age >= (10 +Math.floor(Math.random()* 5)):
+            case this.hungerLevel <= 0 || this.happyLevel <= 0 || this.sleepLevel <= 0:
                 this.state = capyState.dead
                 break;
             case this.hungerLevel >= 50 && this.happyLevel >= 50 && this.sleepLevel >= 50:
@@ -135,13 +135,13 @@ class CapyPal{
     }
     setStage(){
         const capyStage = CapyPal.capyStages
-        if (this.age >=0 && this.age < 2){
+        if (this.age >=0 && this.age < 3){
             this.stage=capyStage.young
         }
         else if(this.age >= 2 && this.age < 7){
             this.stage = capyStage.mid
         }
-        else if(this.age >=7){
+        else if(this.age >= 12){
             this.stage = capyStage.old
         }
     }
@@ -341,6 +341,104 @@ class Game{
     }        
 }
 
+
+//todo
+
+
+class TypeGame { 
+    constructor(str,aniObj){
+        this.wordNode = document.getElementById(str+"-word")
+        this.obj = aniObj
+        this.identifier = str
+        this.wordArray = null
+        this.chars = null          
+        document.addEventListener('keydown', e => this.typeWord(e) )
+}
+    static wordLists = ["handle","theory","length","calm","likely","not","about","face","child","strong","map","asleep","spoken","smoke","rush","list","sale","discover","cry","indeed",
+"vessels","men","brought","everyone","health","pig","combine","goose","driving","distant","folks","suddenly","passage","saved","pack","watch","queen","useful","draw","mighty",
+"unless","skill","deep","is","special","fully","lower","paragraph","canal","terrible","floating","throughout","strike","eaten","cave","officer","of","subject","said","powerful",
+"establish","total","heading","cabin","poet","shelf","stock","then","settle","ranch","table","hurt","blue","chain","original","drawn","service","refused","bow","pie",
+"best","beyond","any","me","nearer","laugh","late","bent","large","graph","garage","thank","sort","blood","definition","being","struck","solid","play","heart",
+"near","ocean","cowboy","same","everybody","dangerous","married","purple","mixture","know","up","related","important","way","came","crop","castle","cotton","raise","lack",
+"rain","liquid","not","running","example","younger","pilot","bottle","size","shot","recent","studying","correct","experience","warm","thus","discuss","can","flame","person",
+"might","hardly","pretty","structure","clear","who","around","better","queen","trunk","hang","unknown","stems","widely","old","gun","unhappy","muscle","but","grow",
+"find","wall","announced","carried","eight","disease","measure","touch","ride","crop","least","letter","space","bad","apartment","shinning","fighting","least","citizen","has",
+"tune","earth","applied","appropriate","fruit","conversation","line","studying","oldest","being","love","tin","obtain","shells","citizen","repeat","swept","city","threw","record",
+"frequently","done","clean","husband","offer","smallest","exact","instant","journey","citizen","tax","balance","piano","protection","badly","brain","modern","cry","knife","character",
+"gather","rope","tonight","rear","environment","poor","coffee","war","leather","broken","vessels","begun","gave","aware","tired","chain","road","jungle","evidence","farther",
+"variety","avoid","research","forget","mill","tube","school","shore","receive","habit","tube","carefully","build","clothing","weather","view","rest","solution","alive","tree",
+"review","applied","quite","plenty","kill","anything","west","examine","paper","closer","occur","molecular","tin","catch","putting","job","caught","memory","modern","graph",
+"model","directly","familiar","positive","grandfather","sides","from","became","several","separate","reason","knowledge","verb","mainly","molecular","on","negative","closely","mental","carried",
+"palace","ranch","wore","combine","people","street","theory","salt","studying","immediately","union","consist","missing","saved","tired","market","coal","doubt","wind","remarkable",
+"grow","blew","kill","shallow","cutting","theory","perfect","between","feet","recall","pull","hurt","especially","draw","dog","future","scared","cast","ball","atomic",
+"believed","ranch","wagon","fireplace","longer","again","region","or","these","paint","observe","circus","available","cage","atom","officer","recent","moon","water","engineer",
+"planet","sister","establish","riding","watch","warm","war","purpose","column","facing","herd","private","war","type","front","dried","electric","many","climate","beginning",
+"bit","money","dot","clock","compound","see","pour","follow","dark","period","voyage","fur","standard","chief","reach","fill","suddenly","sentence","excited","shake",
+"seen","wool","point","brush","line","cloud","at","ready","greatly","learn","save","comfortable","then","she","particularly","truth","cutting","arrange","future","term"]
+    getWord(){
+        const wordList = TypeGame.wordLists
+        this.wordArray = wordList[Math.floor( Math.random()*wordList.length)].split("")
+        for (let i = 0; i < this.wordArray.length; i++){
+            let wordSpan = document.createElement("span")
+            wordSpan.classList.add(this.identifier+"char")
+            wordSpan.textContent = this.wordArray[i]
+            this.wordNode.appendChild(wordSpan)
+        }
+        this.chars = document.getElementsByClassName(this.identifier+"char")
+        console.log(this.obj)
+    }
+    typeWord(e){
+        const key = e.key
+        for (let i = 0; i < this.chars.length; i++){
+            if (this.chars[i].textContent === key){ //if keypress matchs char[i]
+                if(this.chars[i].classList.contains("highlight") === true){ //skip if contains
+                    continue;
+                }
+                else if ((this.chars[i].classList.contains("highlight") === false) && (this.chars[i-1] === undefined || this.chars[i-1].classList.contains("highlight")) ) // includes keys not in order
+                {
+                    this.chars[i].classList.add("highlight")
+                    break;
+                }
+            }
+        }
+        let checker = 0
+        for (let i = 0; i < this.chars.length;i++)
+        {
+            if (this.chars[i].className ===this.identifier+ "char highlight")
+            checker=checker+1
+        }
+        if (checker === this.chars.length)
+        {
+            //add bar, sticker animation
+            while (this.chars.length !=0)
+            {
+                this.chars[0].parentNode.removeChild(this.chars[0])
+                
+            }
+            if (this.identifier === "feed")
+            {
+                this.obj.feed()
+                domElements.randImage(domElements.boardDiv, domElements.buttonImages.feed)
+            }
+            else if (this.identifier ==="play")
+            {
+                this.obj.play()
+                domElements.randImage(domElements.boardDiv, domElements.buttonImages.play)
+            }
+            else if (this.identifier ==="sleep")
+            {
+                this.obj.sleep()
+                domElements.randImage(domElements.boardDiv, domElements.buttonImages.sleep)
+            }
+            this.getWord()
+        }
+
+    }
+
+}
+
+
+//#region 
 let newCapyPal = null
 let newGame = null
 let capyName = null
@@ -348,11 +446,19 @@ let capyAge = null
 domElements.nameDiv.nameButtonEl.addEventListener('click', function(){
     newCapyPal = new CapyPal()
     newGame = new Game(newCapyPal)
-    
+    const feed = new TypeGame("feed",newCapyPal)
+    const play = new TypeGame("play",newCapyPal)
+    const sleep = new TypeGame("sleep",newCapyPal)
+    feed.getWord()
+    play.getWord()
+    sleep.getWord()
+ 
     if(newGame.createChar(capyName)){
         newGame.startGame()
     }
 })
+
+
 domElements.buttons.addHunger.addEventListener('click', function(){
     newCapyPal.feed()
     domElements.randImage(domElements.boardDiv, domElements.buttonImages.feed)
@@ -379,5 +485,6 @@ domElements.deathDiv.resetBut.addEventListener('click', function(){
     //  newGame.startGame()
     domElements.hideEl(domElements.deathDiv.deathEl)
 })
+//#endregion
 
 

@@ -76,3 +76,12 @@ progress{
   0%,100% { opacity: 0; }
   50% { opacity: 1; }
 }
+.words{
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    margin: 10px;
+
+}
+.highlight{
+    background-color: bisque;
+}
