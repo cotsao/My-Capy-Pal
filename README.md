@@ -39,7 +39,7 @@ My first project with General Assembly.
     The user's previous CapyPal with the final age will be added to the scoreboard. 
     To increase any value, the user may press the corresponding button, or type in the word below the button.
 ## Wireframe
-![image](https://github.com/cotsao/My-Capy-Pal/tree/gh-pages/images/wireframe.png)
+![](images/wireframe.png)
 ## To be implemented or fixed
 - Add rules page
 - Hide meters until game begins
