@@ -33,11 +33,7 @@ My first project with General Assembly.
     - Optional typing game to increment values
 
 ## User Stories
-    User will be prompted to input a name for their CapyPal. 
-    Upon inputting their name, the game will begin. Values of hunger, sleepiness, and boredom will begin at 100 and begin decreasing. 
-    When any value hits 0, the CapyPal will die, and the game will end, giving the user an option to try again. 
-    The user's previous CapyPal with the final age will be added to the scoreboard. 
-    To increase any value, the user may press the corresponding button, or type in the word below the button.
+User will be prompted to input a name for their CapyPal. Upon inputting their name, the game will begin. Values of hunger, sleepiness, and boredom will begin at 100 and begin decreasing. When any value hits 0, the CapyPal will die, and the game will end, giving the user an option to try again. The user's previous CapyPal with the final age will be added to the scoreboard. To increase any value, the user may press the corresponding button, or type in the word below the button.
 ## Wireframe
 ![](images/wireframe.png)
 ## To be implemented or fixed
