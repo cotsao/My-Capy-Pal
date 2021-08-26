@@ -1,5 +1,6 @@
 # Welcome to myCapyPal
 My first project with General Assembly.
+Deployed here: https://cotsao.github.io/My-Capy-Pal/
 ## Index:
 
 - [Specifications](#Specifications)
